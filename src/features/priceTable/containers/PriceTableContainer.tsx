@@ -9,6 +9,8 @@ import { PaperSizeSelect } from "../components/PaperSizeSelect";
 import { PriceGrid } from "../components/PriceGrid";
 import { OrderBar } from "../components/OrderBar";
 
+import styles from './PriceTableContainer.module.css';
+
 export function PriceTableContainer() {
   const dispatch = useAppDispatch();
   const { paperSize, selected, hover, expanded } = useAppSelector((s) => s.priceTable);
@@ -23,7 +25,7 @@ export function PriceTableContainer() {
   }, [data, selected]);
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8">
+    <div className={styles.root + " w-full grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8"}>
       <div className="border p-4 bg-zinc-100">
         <PaperSizeSelect value={paperSize as PaperSize} onChange={(v) => dispatch(setPaperSize(v))} />
         <button className="mt-4 border rounded px-4 py-2 bg-white" onClick={() => { /* no-op for now */ }}>Apply</button>
