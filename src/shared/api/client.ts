@@ -4,26 +4,26 @@ import axios from "axios";
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://us-central1-fe-ws-test.cloudfunctions.net";
 
 export const api = axios.create({
-  baseURL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+    baseURL,
+    headers: {
+        "Content-Type": "application/json",
+    },
 });
 
 export type ApiPriceItem = {
-  business_day: number;
-  price: number;
-  quantity: number;
+    business_day: number;
+    price: number;
+    quantity: number;
 };
 
 export type PricesResponse = {
-  paper_size: string;
-  prices: ApiPriceItem[][]; // grouped by quantity (10 groups)
+    paper_size: string;
+    prices: ApiPriceItem[][]; // grouped by quantity (10 groups)
 };
 
 export async function fetchPrices(paperSize: string): Promise<PricesResponse> {
-  const res = await api.get<PricesResponse>("/prices", {
-    params: { paper_size: paperSize },
-  });
-  return res.data;
+    const res = await api.get<PricesResponse>("/prices", {
+        params: {paper_size: paperSize},
+    });
+    return res.data;
 }

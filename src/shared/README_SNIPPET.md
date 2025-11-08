@@ -1,6 +1,7 @@
 This project implements the Raksul price table feature with a feature-first architecture.
 
 Setup
+
 - Copy .env.example to .env.local and adjust NEXT_PUBLIC_API_BASE_URL if necessary.
 - Install dependencies: npm install
 - Run dev: npm run dev
@@ -8,6 +9,7 @@ Setup
 - E2E tests: npm run test:e2e
 
 Libraries and decisions
+
 - React Query for server caching and request dedupe
 - Redux Toolkit + Thunk for app state (selection, UI flags)
 - Axios for HTTP; Lodash for utilities (if needed)

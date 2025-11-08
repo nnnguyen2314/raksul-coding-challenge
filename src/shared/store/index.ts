@@ -1,13 +1,13 @@
 "use client";
-import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import {configureStore} from "@reduxjs/toolkit";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import priceTableReducer from "@/features/priceTable/store/slice";
 
 export const store = configureStore({
-  reducer: {
-    priceTable: priceTableReducer,
-  },
-  // Note: Redux Toolkit already includes thunk in the default middleware
+    reducer: {
+        priceTable: priceTableReducer,
+    },
+    // Note: Redux Toolkit already includes thunk in the default middleware
 });
 
 export type RootState = ReturnType<typeof store.getState>;

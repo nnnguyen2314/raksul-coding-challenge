@@ -1,4 +1,4 @@
-import { PaperSize } from "./types";
+import {PaperSize} from "./types";
 
 export const PAPER_SIZES: PaperSize[] = ["A4", "A5", "B4", "B5"];
 
