@@ -40,16 +40,16 @@ export function PriceGrid({ data, visibleRows, selected, hover, onHover, onSelec
                   sx={{
                     height: 48,
                     width: 80,
-                    borderRight: 1,
-                    borderBottom: 1,
+                    borderRight: isSelected ? 0 : 1,
+                    borderBottom: isSelected ? 0 : 1,
                     borderColor: "divider",
-                    bgcolor: bg,
+                    bgcolor: isSelected ? "#000" : bg,
+                    color: isSelected ? "#fff" : "inherit",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: 14,
-                    outline: isSelected ? "2px solid" : undefined,
-                    outlineColor: isSelected ? "grey.700" : undefined,
+                    outline: "none",
                   }}
                 >
                   {formatYen(cell.price)}
