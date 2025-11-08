@@ -1,0 +1,64 @@
+"use client";
+import React from "react";
+import { PricesMatrix } from "../misc/types";
+import { formatYen } from "@/shared/utils/number";
+import { Box, ButtonBase, Typography } from "@mui/material";
+
+export type PriceGridProps = {
+  data: PricesMatrix | undefined;
+  visibleRows: number; // number of rows to show initially or all
+  selected: { row: number; col: number } | null;
+  hover: { row: number; col: number } | null;
+  onHover: (pos: { row: number; col: number } | null) => void;
+  onSelect: (pos: { row: number; col: number }) => void;
+};
+
+export function PriceGrid({ data, visibleRows, selected, hover, onHover, onSelect }: PriceGridProps) {
+  const rows = data || [];
+  const toShow = rows.slice(0, visibleRows);
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Typography variant="body2" sx={{ mb: 1 }}>Price table</Typography>
+      <Box component="div" sx={{ display: "inline-block", border: 1, borderColor: "divider" }} role="grid" aria-label="Price table">
+        {toShow.map((row, rIdx) => (
+          <Box role="row" sx={{ display: "flex" }} key={rIdx}>
+            {row.map((cell, cIdx) => {
+              const isSelected = selected && selected.row === rIdx && selected.col === cIdx;
+              const isHover = hover && hover.row === rIdx && hover.col === cIdx;
+              const inHoverRow = hover && hover.row === rIdx;
+              const inHoverCol = hover && hover.col === cIdx;
+              const bg = isHover ? "action.hover" : (inHoverRow || inHoverCol) ? "action.selected" : "background.paper";
+              return (
+                <ButtonBase
+                  key={cIdx}
+                  role="gridcell"
+                  aria-label={`Q${cell.quantity} / ${cell.business_day}d: ${cell.price}`}
+                  onMouseEnter={() => onHover({ row: rIdx, col: cIdx })}
+                  onMouseLeave={() => onHover(null)}
+                  onClick={() => onSelect({ row: rIdx, col: cIdx })}
+                  sx={{
+                    height: 48,
+                    width: 80,
+                    borderRight: 1,
+                    borderBottom: 1,
+                    borderColor: "divider",
+                    bgcolor: bg,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 14,
+                    outline: isSelected ? "2px solid" : undefined,
+                    outlineColor: isSelected ? "grey.700" : undefined,
+                  }}
+                >
+                  {formatYen(cell.price)}
+                </ButtonBase>
+              );
+            })}
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
+}
