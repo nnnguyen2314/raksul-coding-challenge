@@ -8,6 +8,7 @@ import { INITIAL_VISIBLE_ROWS } from "../misc/constants";
 import { PaperSizeSelect } from "../components/PaperSizeSelect";
 import { PriceGrid } from "../components/PriceGrid";
 import { OrderBar } from "../components/OrderBar";
+import { Button, Stack } from "@mui/material";
 
 import styles from './PriceTableContainer.module.css';
 
@@ -15,6 +16,13 @@ export function PriceTableContainer() {
   const dispatch = useAppDispatch();
   const { paperSize, selected, hover, expanded } = useAppSelector((s) => s.priceTable);
   const { data, isLoading, isError } = usePrices(paperSize);
+
+  // Local pending state: user changes select first, and applies via button
+  const [pendingPaperSize, setPendingPaperSize] = React.useState<PaperSize>(paperSize as PaperSize);
+  React.useEffect(() => {
+    // keep local state in sync if global paper size changes elsewhere
+    setPendingPaperSize(paperSize as PaperSize);
+  }, [paperSize]);
 
   const visibleRows = expanded ? data?.length ?? INITIAL_VISIBLE_ROWS : INITIAL_VISIBLE_ROWS;
 
@@ -24,11 +32,34 @@ export function PriceTableContainer() {
     return cell?.price ?? null;
   }, [data, selected]);
 
+  const handleApply = () => {
+    if (pendingPaperSize !== paperSize) {
+      dispatch(setPaperSize(pendingPaperSize));
+    }
+  };
+
   return (
     <div className={styles.root + " w-full grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8"}>
       <div className="border p-4 bg-zinc-100">
-        <PaperSizeSelect value={paperSize as PaperSize} onChange={(v) => dispatch(setPaperSize(v))} />
-        <button className="mt-4 border rounded px-4 py-2 bg-white" onClick={() => { /* no-op for now */ }}>Apply</button>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={1.5}
+          alignItems={{ xs: "stretch", sm: "center" }}
+          useFlexGap
+          sx={{ flexWrap: "wrap" }}
+        >
+          <PaperSizeSelect value={pendingPaperSize} onChange={(v) => setPendingPaperSize(v)} />
+          <Button
+            size="small"
+            variant="contained"
+            aria-label="Apply paper size"
+            onClick={handleApply}
+            disabled={pendingPaperSize === paperSize}
+            sx={{ minWidth: 96 }}
+          >
+            Apply
+          </Button>
+        </Stack>
       </div>
       <div className="border p-4 bg-zinc-100">
         {isLoading && <div>Loading…</div>}

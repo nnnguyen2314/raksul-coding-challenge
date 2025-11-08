@@ -10,7 +10,7 @@ export default function Home() {
       <main className="flex min-h-screen w-full max-w-5xl flex-col items-stretch py-12 px-6">
         <ReactQueryProvider>
           <ReduxProvider>
-            <Typography variant="h5" component="h1" sx={{ mb: 3 }}>
+            <Typography variant="h5" component="h1" sx={{ mb: 3, color: "#000", fontWeight: "bold" }}>
               Raksul Paper Printing
             </Typography>
             <PriceTableContainer />
