@@ -40,7 +40,7 @@ A small Next.js app that renders an interactive price table for Raksul’s paper
 ## Project structure (high level)
 - `src/features/priceTable`
   - `components/` — UI pieces: Paper size select, grid, order bar
-  - `containers/` — Composes feature, wires hooks and store
+  - `containers/` — Composes feature, wires hooks, and store
   - `hooks/` — Data fetching with React Query
   - `misc/` — Constants and types
   - `store/` — Redux slice
@@ -65,7 +65,7 @@ A small Next.js app that renders an interactive price table for Raksul’s paper
 - “See more” expands hidden quantity rows (first 5 are shown initially).
 
 ## Why these libraries?
-- Next.js (App Router) vs Vite/CRA
+- Next.js (App Router)
   - Server rendering, routing, and asset pipeline are built‑in and production‑ready.
   - App Router aligns well with React 18+/19 concurrent features and file‑system routing.
 - React Query (@tanstack/react-query)
@@ -74,14 +74,14 @@ A small Next.js app that renders an interactive price table for Raksul’s paper
 - Redux Toolkit (+ redux‑thunk)
   - Co‑locates feature reducers/slices with minimal boilerplate and immutable updates out of the box.
   - Great devtools and ecosystem; explicit UI state management keeps fetch/cache concerns in React Query.
-- MUI (with Emotion) vs Tailwind‑only/Chakra/Ant
+- MUI (with Emotion)
   - MUI offers accessible, themed components (Select, Grid, Typography) that accelerate delivery.
   - Emotion integration enables flexible styling; Tailwind remains for quick layout utilities.
-- Axios vs fetch
-  - Interceptors, timeouts, and consistent JSON handling make API code concise and testable.
-- Jest + React Testing Library vs alternatives
+- Axios
+  - Interceptors, timeout, and consistent JSON handling make API code concise and testable.
+- Jest + React Testing Library
   - jsdom environment matches component behavior; RTL encourages testing user interactions over implementation details.
-- Playwright vs Cypress
+- Playwright
   - Cross‑browser by default (Chromium/Firefox/WebKit), powerful auto‑waits, great parallelization for CI.
 
 ## Testing

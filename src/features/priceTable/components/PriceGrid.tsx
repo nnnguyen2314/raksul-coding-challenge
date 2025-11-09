@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import {PricesMatrix} from "../misc/types";
-import {formatYen} from "@/shared/utils/numbers";
+import {formatNumber} from "@/shared/utils/numbers";
 import {Box, ButtonBase, Typography} from "@mui/material";
 
 export type PriceGridProps = {
@@ -55,7 +55,7 @@ export function PriceGrid({data, visibleRows, selected, hover, onHover, onSelect
                                             outline: "none",
                                         }}
                                     >
-                                        {formatYen(cell.price)}
+                                        {formatNumber(cell.price)}
                                     </ButtonBase>
                                 );
                             })}
