@@ -8,7 +8,7 @@ import {INITIAL_VISIBLE_ROWS} from "../misc/constants";
 import {PaperSizeSelect} from "../components/PaperSizeSelect";
 import {PriceGrid} from "../components/PriceGrid";
 import {OrderBar} from "../components/OrderBar";
-import {Button, Stack} from "@mui/material";
+import {Button, Stack, CircularProgress, Box} from "@mui/material";
 
 import styles from './PriceTableContainer.module.css';
 
@@ -62,17 +62,36 @@ export function PriceTableContainer() {
                 </Stack>
             </div>
             <div className="border p-4 bg-zinc-100">
-                {isLoading && <div>Loading…</div>}
                 {isError && <div>Error loading prices</div>}
-                {/* Always render the grid so tests and users can see the layout immediately. */}
-                <PriceGrid
-                    data={data}
-                    visibleRows={visibleRows}
-                    selected={selected}
-                    hover={hover}
-                    onHover={(pos) => dispatch(setHover(pos))}
-                    onSelect={(pos) => dispatch(setSelected(pos))}
-                />
+                <Box sx={{ position: "relative" }}>
+                    {/* Always render the grid so tests and users can see the layout immediately. */}
+                    <PriceGrid
+                        data={data}
+                        visibleRows={visibleRows}
+                        selected={selected}
+                        hover={hover}
+                        onHover={(pos) => dispatch(setHover(pos))}
+                        onSelect={(pos) => dispatch(setSelected(pos))}
+                    />
+                    {/* Loading overlay (non-blocking) */}
+                    {(isLoading) && (
+                        <Box
+                            role="status"
+                            aria-live="polite"
+                            sx={{
+                                position: "absolute",
+                                inset: 0,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                bgcolor: "rgba(255,255,255,0.6)",
+                                pointerEvents: "none",
+                            }}
+                        >
+                            <CircularProgress size={28} thickness={5} />
+                        </Box>
+                    )}
+                </Box>
                 {!expanded && (
                     <button className="mt-3 text-sm underline" onClick={() => dispatch(setExpanded(true))}>
                         See more
