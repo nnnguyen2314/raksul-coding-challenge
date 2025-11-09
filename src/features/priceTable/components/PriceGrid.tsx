@@ -6,7 +6,7 @@ import {Box, ButtonBase, Typography} from "@mui/material";
 
 export type PriceGridProps = {
     data: PricesMatrix | undefined;
-    visibleRows: number; // number of rows to show initially or all
+    visibleRows: number;
     selected: { row: number; col: number } | null;
     hover: { row: number; col: number } | null;
     onHover: (pos: { row: number; col: number } | null) => void;

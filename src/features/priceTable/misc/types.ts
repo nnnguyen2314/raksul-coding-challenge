@@ -6,4 +6,4 @@ export type PriceCell = {
     quantity: number;
 };
 
-export type PricesMatrix = PriceCell[][]; // rows = quantities, cols = business_day values for that quantity
+export type PricesMatrix = PriceCell[][];

@@ -1,6 +1,5 @@
 // Utility: format positive integers with comma as thousands separator without using toLocaleString or Intl.NumberFormat
 // Source inspiration: chunking digits from the end and joining with commas is a common approach.
-// Implementation by Junie.
 export function formatYen(n: number): string {
     if (!Number.isFinite(n) || n < 0) throw new Error("formatYen expects a non-negative finite number");
     const s = Math.floor(n).toString();

@@ -7,7 +7,6 @@ export const store = configureStore({
     reducer: {
         priceTable: priceTableReducer,
     },
-    // Note: Redux Toolkit already includes thunk in the default middleware
 });
 
 export type RootState = ReturnType<typeof store.getState>;

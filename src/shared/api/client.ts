@@ -18,7 +18,7 @@ export type ApiPriceItem = {
 
 export type PricesResponse = {
     paper_size: string;
-    prices: ApiPriceItem[][]; // grouped by quantity (10 groups)
+    prices: ApiPriceItem[][];
 };
 
 export async function fetchPrices(paperSize: string): Promise<PricesResponse> {
