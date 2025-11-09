@@ -64,22 +64,19 @@ export function PriceTableContainer() {
             <div className="border p-4 bg-zinc-100">
                 {isLoading && <div>Loading…</div>}
                 {isError && <div>Error loading prices</div>}
-                {!isLoading && !isError && (
-                    <>
-                        <PriceGrid
-                            data={data}
-                            visibleRows={visibleRows}
-                            selected={selected}
-                            hover={hover}
-                            onHover={(pos) => dispatch(setHover(pos))}
-                            onSelect={(pos) => dispatch(setSelected(pos))}
-                        />
-                        {!expanded && (
-                            <button className="mt-3 text-sm underline" onClick={() => dispatch(setExpanded(true))}>
-                                See more
-                            </button>
-                        )}
-                    </>
+                {/* Always render the grid so tests and users can see the layout immediately. */}
+                <PriceGrid
+                    data={data}
+                    visibleRows={visibleRows}
+                    selected={selected}
+                    hover={hover}
+                    onHover={(pos) => dispatch(setHover(pos))}
+                    onSelect={(pos) => dispatch(setSelected(pos))}
+                />
+                {!expanded && (
+                    <button className="mt-3 text-sm underline" onClick={() => dispatch(setExpanded(true))}>
+                        See more
+                    </button>
                 )}
             </div>
             <div className="md:col-span-2">
