@@ -56,7 +56,7 @@ A small Next.js app that renders an interactive price table for Raksul’s paper
 - Data fetching: `usePrices` hook calls `GET /prices?paper_size=...` using Axios via React Query. Responses are cached and requests are deduplicated.
 - State management: Redux Toolkit stores UI state (paper size, selected cell, expanded rows). Derived UI updates are driven by slice actions/selectors.
 - UI: Material UI (MUI) components with Emotion styling; Tailwind utility classes are used for layout scaffolding where convenient.
-- Number formatting: `src/shared/utils/number.ts` implements a custom comma‑insertion algorithm to format positive integers without `toLocaleString`/`Intl.NumberFormat`.
+- Number formatting: `src/shared/utils/numbers.ts` implements a custom comma‑insertion algorithm to format positive integers without `toLocaleString`/`Intl.NumberFormat`.
 
 ## How pricing works (UI)
 - The table shows quantities (rows) vs business days (columns).

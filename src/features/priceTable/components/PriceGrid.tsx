@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import {PricesMatrix} from "../misc/types";
-import {formatYen} from "@/shared/utils/number";
+import {formatYen} from "@/shared/utils/numbers";
 import {Box, ButtonBase, Typography} from "@mui/material";
 
 export type PriceGridProps = {

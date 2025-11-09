@@ -1,4 +1,4 @@
-import { formatYen } from "@/shared/utils/number";
+import { formatYen } from "@/shared/utils/numbers";
 
 describe("formatYen", () => {
   it("formats small numbers", () => {
